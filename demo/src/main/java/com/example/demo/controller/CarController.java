@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @ResponseBody
 public class CarController {
@@ -17,6 +18,8 @@ public class CarController {
     public CarController(CarService carService) {
         this.carService = carService;
     }
+
+
     @GetMapping("/admin/car")
     public ResponseEntity<List<CarModel>> index() {
 

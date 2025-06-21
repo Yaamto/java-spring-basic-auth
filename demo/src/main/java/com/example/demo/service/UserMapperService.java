@@ -11,8 +11,7 @@ public class UserMapperService {
         return new UserDTO(
                 user.getId(),
                 user.getUsername(),
-                user.getEmail(),
-                user.getRoles()
+                user.getEmail()
         );
     }
 }

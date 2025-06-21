@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> HandleGenericException(GenericException e) {
+    @ExceptionHandler(GenericException.class)
+    public ResponseEntity<String> handleGenericException(GenericException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -36,6 +36,12 @@ public class GlobalExceptionHandler {
         response.put("errors", errors);
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    // Gestion globale des autres exceptions non prévues
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleAllExceptions(Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur serveur : " + e.getMessage());
     }
  }
 
